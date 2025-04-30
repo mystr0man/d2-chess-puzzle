@@ -6,7 +6,7 @@ def euclidean_distance(a: np.ndarray, b: np.ndarray) -> float:
     return float(distance)
 
 
-def compare_edges(grid: np.ndarray):
+def compare_edges(grid: np.ndarray, mass_list: list):
     # dummy numbers to be compared to
     best_top_dist = 9999
     best_bottom_dist = 9999
@@ -34,26 +34,26 @@ def compare_edges(grid: np.ndarray):
         other_right_edge = np.ndarray.flatten(other[:, -1])  # last column
 
         # if the current best distance to that direction is that one (said well me), update to that
-        if euclidian_distance(self_top_edge, other_bottom_edge) < best_top_dist:
-            best_top_dist = euclidian_distance(self_top_edge, other_bottom_edge)
+        if euclidean_distance(self_top_edge, other_bottom_edge) < best_top_dist:
+            best_top_dist = euclidean_distance(self_top_edge, other_bottom_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_top_index = j
-        elif euclidian_distance(self_bottom_edge, other_top_edge) < best_bottom_dist:
-            best_bottom_dist = euclidian_distance(self_bottom_edge, other_top_edge)
+        elif euclidean_distance(self_bottom_edge, other_top_edge) < best_bottom_dist:
+            best_bottom_dist = euclidean_distance(self_bottom_edge, other_top_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_bottom_index = j
-        elif euclidian_distance(self_left_edge, other_right_edge) < best_left_dist:
-            best_left_dist = euclidian_distance(self_left_edge, other_right_edge)
+        elif euclidean_distance(self_left_edge, other_right_edge) < best_left_dist:
+            best_left_dist = euclidean_distance(self_left_edge, other_right_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_left_index = j
-        elif euclidian_distance(self_right_edge, other_left_edge) < best_right_dist:
-            best_right_dist = euclidian_distance(self_right_edge, other_left_edge)
+        elif euclidean_distance(self_right_edge, other_left_edge) < best_right_dist:
+            best_right_dist = euclidean_distance(self_right_edge, other_left_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):

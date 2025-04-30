@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from .edgecompare import compare_edges, euclidean_distance
+from edgecompare import compare_edges  # , euclidean_distance
 
 table = pd.read_csv("./data.tsv", delimiter="\t", lineterminator="\n")
 
@@ -44,4 +44,4 @@ for row in mass_list_np:
     mass_list.append(board)
 
 # print(mass_list[0])
-print(compare_edges(mass_list[0]))
+print(compare_edges(mass_list[0], mass_list))
