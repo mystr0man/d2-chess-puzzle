@@ -52,5 +52,10 @@ for row in mass_list_np:
     board = board.reshape((8, 8))
     mass_list.append(board)
 
+mass_list_hash = {} #dictionary because apparently that's python's best hash table
+for i in range(len(mass_list)): 
+    mass_list_hash[table.iloc[i, table.columns.get_loc('id')]] = mass_list[i]
+
+
 # print(mass_list[0])
 print(compare_edges(mass_list[0], mass_list))
