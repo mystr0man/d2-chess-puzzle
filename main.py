@@ -1,39 +1,44 @@
 import numpy as np
-import csv
+import pandas as pd
 
-# from .edgecompare import compare_edges, euclidian_distance
-
-data_file = "data.tsv"
-
-# Read the TSV file
-with open(data_file, "r") as file:
-    reader = csv.reader(file, delimiter="\t")
-
-    # get "board" column only
-    board_column = [row[2] for row in reader]
+table = pd.read_csv("./data.tsv", delimiter="\t", lineterminator="\n")
 
 pieces = {
     # white
-    "Bw": 0,
-    "Kw": 1,
-    "Nw": 2,
-    "Pw": 3,
-    "Qw": 4,
-    "Rw": 5,
+    "Bw": 1,
+    "Kw": 2,
+    "Nw": 3,
+    "Pw": 4,
+    "Qw": 5,
+    "Rw": 6,
     # black
-    "Bb": 6,
-    "Kb": 7,
-    "Nb": 8,
-    "Pb": 9,
-    "Qb": 10,
-    "Rb": 11,
-    "": None,
+    "Bb": 7,
+    "Kb": 8,
+    "Nb": 9,
+    "Pb": 10,
+    "Qb": 11,
+    "Rb": 12,
 }
 
-for row in board_column[1:]:
-    row_pieces = row.split(",")
-    for i in range(len(row_pieces)):
-        row_pieces[i] = pieces[row_pieces[i]]
-    # create a 2d array
-    row_pieces = np.array(row_pieces).reshape(8, 8)
-    print(row_pieces)
+# pandas code to drop duplicate entries - ignoring frequency for now (I don't trust data integrity in that column)
+trim_table = table.drop_duplicates(subset=["board", "fill", "hasQR"], keep="first")
+# print(trim_table.shape)
+
+# grab the column we need for mass_list specifically
+mass_list_pd = trim_table["board"]
+mass_list_np = mass_list_pd.to_numpy()
+# print(mass_list_np)
+
+# make the complete mass_list
+mass_list = []
+# for each row of the numpy table
+for row in mass_list_np:
+    arr = row.split(",")
+    board = np.zeros((64))
+    for index, piece in enumerate(arr):
+        if piece != "":
+            board[index] = pieces[piece]
+    board = board.reshape((8, 8))
+    mass_list.append(board)
+
+print(mass_list[0])
