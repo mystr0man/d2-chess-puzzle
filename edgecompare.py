@@ -34,25 +34,25 @@ def compare_edges(grid: np.ndarray, mass_list: list):
         other_right_edge = np.ndarray.flatten(other[:, -1])  # last column
 
         # if the current best distance to that direction is that one (said well me), update to that
-        if euclidean_distance(self_top_edge, other_bottom_edge) < best_top_dist:
+        if (not np.all(self_top_edge == 6)) and euclidean_distance(self_top_edge, other_bottom_edge) < best_top_dist:
             best_top_dist = euclidean_distance(self_top_edge, other_bottom_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_top_index = j
-        elif euclidean_distance(self_bottom_edge, other_top_edge) < best_bottom_dist:
+        elif (not np.all(self_bottom_edge == 6)) and euclidean_distance(self_bottom_edge, other_top_edge) < best_bottom_dist:
             best_bottom_dist = euclidean_distance(self_bottom_edge, other_top_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_bottom_index = j
-        elif euclidean_distance(self_left_edge, other_right_edge) < best_left_dist:
+        elif (not np.all(self_left_edge == 6)) and euclidean_distance(self_left_edge, other_right_edge) < best_left_dist:
             best_left_dist = euclidean_distance(self_left_edge, other_right_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
                 if np.array_equal(arr, other):
                     best_left_index = j
-        elif euclidean_distance(self_right_edge, other_left_edge) < best_right_dist:
+        elif (not np.all(self_right_edge == 6)) and euclidean_distance(self_right_edge, other_left_edge) < best_right_dist:
             best_right_dist = euclidean_distance(self_right_edge, other_left_edge)
             # enumerate because .index() doesnt work for arrays
             for j, arr in enumerate(mass_list):
@@ -71,4 +71,4 @@ if __name__ == "__main__":
         np.array([[-1, -1, -1], [-1, -1, -1], [1, 2, 3]]),
         np.array([[-1, 8, 11], [4, 12, -1], [7, 3, -333]]),
     ]
-    print(compare_edges(mass_list[0]))
+    print(compare_edges(mass_list[0], mass_list))
