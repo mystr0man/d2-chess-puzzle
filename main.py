@@ -3,7 +3,7 @@ import pandas as pd
 
 from edgecompare import compare_edges  # , euclidean_distance
 
-table = pd.read_csv("./data.tsv", delimiter="\t", lineterminator="\n")
+table = pd.read_csv("./data-verified.tsv", delimiter="\t", lineterminator="\n")
 
 pieces = {
     # white
@@ -22,9 +22,18 @@ pieces = {
     "Rb": 12,
 }
 
+# get unique frequencies
+frequencies = table["frequency"].unique()
+frequencies.sort()
+# print("Unique frequencies:", len(frequencies))
+# for i in frequencies:
+#     print(i)
+
 # pandas code to drop duplicate entries - ignoring frequency for now (I don't trust data integrity in that column)
 trim_table = table.drop_duplicates(subset=["board", "fill", "hasQR"], keep="first")
 # print(trim_table.shape)
+
+
 
 # grab the column we need for mass_list specifically
 mass_list_pd = trim_table["board"]

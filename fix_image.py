@@ -1,3 +1,7 @@
+"""
+Author: Ryheff24 on discord
+"""
+
 import os
 import cv2
 import numpy as np
