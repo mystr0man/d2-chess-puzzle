@@ -54,7 +54,13 @@ for row in mass_list_np:
 
 mass_list_hash = {} #dictionary because apparently that's python's best hash table
 for i in range(len(mass_list)): 
-    mass_list_hash[table.iloc[i, table.columns.get_loc('id')]] = mass_list[i]
+    mass_list_hash[table.iloc[i, table.columns.get_loc('frequency')]] = mass_list[i]
+
+# also gonna make a list of frequencies if that's easier
+freq_list_np = trim_table['frequency'].to_numpy() 
+freq_list = []
+for row in freq_list_np: 
+    freq_list.append(row)
 
 
 # print(mass_list[0])
