@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def euclidian_distance(a: np.ndarray, b: np.ndarray) -> float:
+def euclidean_distance(a: np.ndarray, b: np.ndarray) -> float:
     distance = np.linalg.norm(a - b)
     return float(distance)
 
